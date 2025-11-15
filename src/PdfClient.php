@@ -196,7 +196,8 @@ class PdfClient
     }
 
     /**
-     * Verify webhook authenticity and return parsed payload
+     * Verify webhook authenticity and return parsed payload.
+     * Header name sent by API: x-pdf-service-signature
      * @param string $rawBody
      * @param string $signature
      * @return mixed
