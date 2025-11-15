@@ -306,10 +306,6 @@ composer install
 vendor/bin/phpunit
 ```
 
-## CI/CD
-
-This package includes a GitHub Actions workflow (`.github/workflows/php.yml`) that runs tests on PHP 8.0, 8.1, and 8.2 on every push and pull request.
-
 ## License
 
 MIT License – see LICENSE file for details.
