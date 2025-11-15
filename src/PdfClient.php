@@ -165,20 +165,21 @@ class PdfClient
                 $downloadUrl = $job['downloadUrl'];
                 if ($saveTo) {
                     try {
-                        $stream = $this->client->request('GET', $downloadUrl, ['stream' => true]);
-                        $out = fopen($saveTo, 'wb');
-                        foreach ($stream->getBody() as $chunk) {
-                            fwrite($out, $chunk);
-                        }
-                        fclose($out);
+                        // Use a fresh Guzzle client without auth headers for download URL
+                        $downloadClient = new Client(['timeout' => 0]);
+                        $response = $downloadClient->request('GET', $downloadUrl);
+                        $body = $response->getBody();
+                        $contents = $body->getContents();
+                        file_put_contents($saveTo, $contents);
                         return $saveTo;
                     } catch (GuzzleException $e) {
                         throw $e;
                     }
                 } else {
-                    $res2 = $this->client->request('GET', $downloadUrl, ['sink' => fopen('php://temp', 'w+b')]);
-                    $contents = $res2->getBody()->getContents();
-                    return $contents;
+                    // Return raw bytes
+                    $downloadClient = new Client(['timeout' => 0]);
+                    $response = $downloadClient->request('GET', $downloadUrl);
+                    return (string)$response->getBody();
                 }
             }
 
