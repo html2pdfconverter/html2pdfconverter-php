@@ -1,0 +1,19 @@
+{
+  "name": "html2pdfconverter/php-client",
+  "description": "PHP client for the html2pdfconverter.com SaaS API",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Html2PdfConverter\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=8.0",
+    "guzzlehttp/guzzle": "^7.0"
+  }
+  ,
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  }
+}
